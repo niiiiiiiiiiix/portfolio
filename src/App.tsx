@@ -1,25 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import HomePage from './components/GenericUi/HomePage/HomePage';
+import NavBar from "./components/GenericUi/NavBar/NavBar";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import SplitIt from './components/Features/SplitMyBill/SplitMyBill';
 
 function App() {
   return (
-    <div className="App">
+    <BrowserRouter>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <NavBar />
       </header>
-    </div>
+      <main className="App-main">
+        <Routes>
+          <Route path="/" element={<HomePage/>}/>
+          <Route path="/splitmybill"  element={<SplitIt/>}/>
+        </Routes>
+      </main>
+      <footer className="App-footer">
+        Bye
+      </footer>
+    </BrowserRouter>
   );
 }
 
