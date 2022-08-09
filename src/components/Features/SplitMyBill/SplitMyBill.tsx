@@ -1,10 +1,11 @@
-import React from "react";
-
+import React, { ChangeEvent, useState } from "react";
+import GetValue from "./GetValue";
+import Greet from "./SimpleGreeter";
 const SplitMyBill = () => {
   return (
-    <div className="SplitIt">
-      <p>Hello</p>
-      <p>NavBar</p>
+    <div className="SplitMyBill">
+      <Greet name="random"/>
+      <GetValue stringValue="something"/>
     </div>
   );
 };

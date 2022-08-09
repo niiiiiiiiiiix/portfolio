@@ -3,7 +3,7 @@ import './App.css';
 import HomePage from './components/GenericUi/HomePage/HomePage';
 import NavBar from "./components/GenericUi/NavBar/NavBar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import SplitIt from './components/Features/SplitMyBill/SplitMyBill';
+import SplitMyBill from './components/Features/SplitMyBill/SplitMyBill';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <main className="App-main">
         <Routes>
           <Route path="/" element={<HomePage/>}/>
-          <Route path="/splitmybill"  element={<SplitIt/>}/>
+          <Route path="/splitmybill"  element={<SplitMyBill/>}/>
         </Routes>
       </main>
       <footer className="App-footer">
