@@ -1,37 +1,31 @@
 import React, { ChangeEvent, useState } from "react";
 
 interface Value {
-  stringValue: string;
+  label: string;
+  count?: number;
 }
 
-export default function GetValue({ stringValue }: Value) {
-  const [ value , setValue] = useState<number>();
+export default function InputValue({ label, count }: Value) {
+  const onlyNumberRegex = new RegExp("^[0-9]*$");
+  const [ value , setValue] = useState<number>(0);
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const input = event.target.value;
-    if(typeof input == "number") {
-      setValue(input);
-      console.log(input);
-    }
-    else {
-      console.log("not a number");
+    if(onlyNumberRegex.test(input) === true) {
+      setValue(parseFloat(input));
     }
   }
 
   return (
     <div className="set-number">
       <div>
-        <label>
-          costs: 
-          <br/>
-        </label>
-        <input 
-        type="text" 
-        placeholder={stringValue}
-        value={value}
-        onChange={handleInputChange}
-        required
-        />
+        {label}
       </div>
+      <input 
+      type="text"
+      value={value || ""}
+      onChange={handleInputChange}
+      required
+      />
     </div>
   );
 };
