@@ -4,4 +4,6 @@ export const properties = {
   totalCost: "totalCost",
   numOfParticipants: "Number of Participants: ",
   totalCost2: "Total Cost: ",
+  itemName: "Item Name: ",
+  itemCost: "Item Cost: ",
 };
