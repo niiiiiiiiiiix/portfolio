@@ -39,12 +39,15 @@ const SplitMyBill = () => {
 
   // const [ messageList, setMessageList ] = useState<{item: string}[]>([]);
   const [ message, setMessage ] = useState<string>("");
+  const [ submittedMessage, setSubmittedMessage ] = useState<string | null>(null)
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
   }
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
+    setSubmittedMessage(message);
     console.log(message)
+    setMessage("")
   }
 
   return (
@@ -76,7 +79,7 @@ const SplitMyBill = () => {
         {(calculate())}
       </div> */}
       <BaseCalculator totalCost={totalCost} totalCount={participantCount}/>
-      <Message value={message} handleSubmit={handleSubmit} handleChange={handleChange}/>
+      <Message value={message} handleSubmit={handleSubmit} handleChange={handleChange} submittedMessage={submittedMessage}/>
     </div>
   );
 };

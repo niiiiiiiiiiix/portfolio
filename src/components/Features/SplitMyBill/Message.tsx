@@ -4,9 +4,10 @@ interface Message {
   value: string,
   handleSubmit: React.FormEventHandler<HTMLFormElement>, 
   handleChange: React.ChangeEventHandler<HTMLInputElement>
+  submittedMessage: null | string
 }
 
-export default function Message({value, handleSubmit, handleChange}: Message) {
+export default function Message({value, handleSubmit, handleChange, submittedMessage}: Message) {
   return (
     <div className="message-container">
         {"Message"}
@@ -25,6 +26,11 @@ export default function Message({value, handleSubmit, handleChange}: Message) {
               Submit
             </button>
         </form>
+        <div>
+          {submittedMessage && 
+          <p>You just typed: {submittedMessage}</p>
+          }
+        </div>
       </div>
   );
 }
