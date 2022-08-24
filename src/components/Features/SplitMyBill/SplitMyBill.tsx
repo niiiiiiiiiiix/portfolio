@@ -1,9 +1,11 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useState, FormEvent } from "react";
 import InputValue from "./GetValue";
 import Greet from "./SimpleGreeter";
 import Message from "./Message";
 import { properties } from "../../../StaticValues/properties";
 import BaseCalculator from "./Calculator/BaseCalculator";
+import AddParty from "./AddParty";
+import PersonPayableMap from "./PersonPayableMap";
 
 const SplitMyBill = () => {
   const gstMultiplier = 1.07;
@@ -26,60 +28,41 @@ const SplitMyBill = () => {
     return value * serviceTaxMultiplier * gstMultiplier
   }
 
-  // const handleItemInputChange = (e:ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target
-  //   console.log(name)
-  //   console.log(value)
-  //   setItems({
-  //     ...items,
-  //     [name]: value
-  //   })
-  //   console.log(items)
-  // }
-
-  // const [ messageList, setMessageList ] = useState<{item: string}[]>([]);
+  // for sending a message
   const [ message, setMessage ] = useState<string>("");
   const [ submittedMessage, setSubmittedMessage ] = useState<string | null>(null)
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     setMessage(e.target.value);
   }
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmittedMessage(message);
     console.log(message)
     setMessage("")
   }
 
+  // to display final cost per person
+  const [ personName, setPersonName ] = useState<string>("");
+  const [ amountPayable, setAmountPayable ] = useState<number>(0);
+  const [ personCostMap, setPersonCostMap ] = useState<{[key: string]: number}>({});
+  const handlePersonNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPersonName(e.target.value);
+  }
+  const addPersonToParty = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    personCostMap[personName] = amountPayable
+    setPersonCostMap(personCostMap)
+    setPersonName("")
+  }
+
   return (
     <div className="split-bill">
       <Greet name="random"/>
-      {/* <GetValue stringValue="something"/> */}
-      {/* <div className="count-participants">
-        {properties.numOfParticipants}
-          <input 
-          type="text"
-          value={participantCount}
-          onChange={(e) => {
-            console.log(participantCount)
-            handleInputChange(e, properties.participantCount)
-          }}
-          required
-          />
-      </div> */}
-      {/* <div className="total-costs">
-        {properties.totalCost2}
-          <input 
-          type="text"
-          value={totalCost}
-          onChange={(e) => handleInputChange(e, properties.totalCost)}
-          required
-          />
-      </div> */}
-      {/* <div>
-        {(calculate())}
-      </div> */}
       <BaseCalculator totalCost={totalCost} totalCount={participantCount}/>
       <Message value={message} handleSubmit={handleSubmit} handleChange={handleChange} submittedMessage={submittedMessage}/>
+      <AddParty name={personName} addPersonToParty={addPersonToParty} handlePersonNameChange={handlePersonNameChange}/>
+      <PersonPayableMap personCostMap={personCostMap}/>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 interface BaseCalculator {
-  totalCost: string,
+  totalCost: string
   totalCount: string
 }
 

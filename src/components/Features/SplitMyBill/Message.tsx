@@ -1,8 +1,8 @@
 import React from "react";
 
 interface Message {
-  value: string,
-  handleSubmit: React.FormEventHandler<HTMLFormElement>, 
+  value: string
+  handleSubmit: React.FormEventHandler<HTMLFormElement>
   handleChange: React.ChangeEventHandler<HTMLInputElement>
   submittedMessage: null | string
 }
