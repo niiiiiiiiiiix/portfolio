@@ -1,18 +1,18 @@
 import React from "react";
 
 interface AddParty {
-  name: string
-  addPersonToParty: React.FormEventHandler<HTMLFormElement>
-  handlePersonNameChange: React.ChangeEventHandler<HTMLInputElement>
+  partyName: string
+  addPartySubmit: React.FormEventHandler<HTMLFormElement>
+  addPartyInput: React.ChangeEventHandler<HTMLInputElement>
 }
 
-export default function AddParty({name, addPersonToParty, handlePersonNameChange}: AddParty) {
+export default function AddParty({partyName, addPartySubmit, addPartyInput}: AddParty) {
   return (
     <div>
-        <form onSubmit={addPersonToParty}>
+        <form onSubmit={addPartySubmit}>
           <input 
-            value={name}
-            onChange={handlePersonNameChange}
+            value={partyName}
+            onChange={addPartyInput}
             type="text"
             placeholder="Enter a name"
             className="person-name"

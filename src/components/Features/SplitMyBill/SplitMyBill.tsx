@@ -42,18 +42,18 @@ const SplitMyBill = () => {
     setMessage("")
   }
 
-  // to display final cost per person
-  const [ personName, setPersonName ] = useState<string>("");
+  // AddPartyComponent
+  const [ partyName, setPartyName ] = useState<string>("");
   const [ amountPayable, setAmountPayable ] = useState<number>(0);
-  const [ personCostMap, setPersonCostMap ] = useState<{[key: string]: number}>({});
-  const handlePersonNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPersonName(e.target.value);
+  const [ partyPayableMap, setPartyPayableMap ] = useState<{[key: string]: number}>({});
+  const addPartyInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setPartyName(e.target.value);
   }
-  const addPersonToParty = (e: FormEvent<HTMLFormElement>) => {
+  const addPartySubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    personCostMap[personName] = amountPayable
-    setPersonCostMap(personCostMap)
-    setPersonName("")
+    partyPayableMap[partyName] = amountPayable;
+    setPartyPayableMap(partyPayableMap);
+    setPartyName("");
   }
 
   return (
@@ -61,8 +61,8 @@ const SplitMyBill = () => {
       <Greet name="random"/>
       <BaseCalculator totalCost={totalCost} totalCount={participantCount}/>
       <Message value={message} handleSubmit={handleSubmit} handleChange={handleChange} submittedMessage={submittedMessage}/>
-      <AddParty name={personName} addPersonToParty={addPersonToParty} handlePersonNameChange={handlePersonNameChange}/>
-      <PersonPayableMap personCostMap={personCostMap}/>
+      <AddParty partyName={partyName} addPartySubmit={addPartySubmit} addPartyInput={addPartyInput}/>
+      <PersonPayableMap partyPayableMap={partyPayableMap}/>
     </div>
   );
 };

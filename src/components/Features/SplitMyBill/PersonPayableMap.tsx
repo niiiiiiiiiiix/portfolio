@@ -1,15 +1,15 @@
 import React from "react";
 
-interface PersonPayableMap {
-  personCostMap: object
+interface PartyPayable {
+  partyPayableMap: object
 }
 
-export default function AddParty({personCostMap}: PersonPayableMap) {
+export default function AddParty({partyPayableMap}: PartyPayable) {
   return (
     <div>
         <div>
           {
-            Object.entries(personCostMap).map(([key, value], index) => {
+            Object.entries(partyPayableMap).map(([key, value], index) => {
               return (
                 <div key={index}>
                   <div>
