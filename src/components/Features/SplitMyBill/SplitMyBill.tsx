@@ -1,11 +1,10 @@
 import React, { ChangeEvent, useState, FormEvent, MouseEvent } from "react";
 import InputValue from "./GetValue";
-import Greet from "./SimpleGreeter";
 import { properties } from "../../../StaticValues/properties";
 import BaseCalculator from "./Calculator/BaseCalculator";
 import AddParty from "./AddParty";
 import AddItem from "./AddItem";
-import PersonPayableMap from "./PartyPayableMap";
+import PartyPayableMap from "./PartyPayableMap";
 import ItemMap from "./ItemMap";
 
 const SplitMyBill = () => {
@@ -83,10 +82,9 @@ const SplitMyBill = () => {
 
   return (
     <div className="split-bill">
-      <Greet name="random"/>
       <BaseCalculator totalCost={totalCost} totalCount={participantCount}/>
       <AddParty partyName={partyName} addPartySubmit={addPartySubmit} addPartyInput={addPartyInput}/>
-      <PersonPayableMap partyPayableMap={partyPayableMap} deleteParty={deleteParty}/>
+      <PartyPayableMap partyPayableMap={partyPayableMap} deleteParty={deleteParty}/>
       <AddItem itemName={itemName} itemCost={itemCost} addItemSubmit={addItemSubmit} addItemNameInput={addItemNameInput} addItemCostInput={addItemCostInput}/>
       <ItemMap itemMap={itemMap} deleteItem={deleteItem}/>
     </div>
