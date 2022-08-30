@@ -2,8 +2,8 @@ import React from "react";
 
 interface AddParty {
   partyName: string
-  addPartySubmit: React.FormEventHandler<HTMLFormElement>
   addPartyInput: React.ChangeEventHandler<HTMLInputElement>
+  addPartySubmit: React.FormEventHandler<HTMLFormElement>
 }
 
 export default function AddParty({partyName, addPartySubmit, addPartyInput}: AddParty) {

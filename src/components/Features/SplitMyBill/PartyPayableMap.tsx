@@ -1,11 +1,11 @@
 import React from "react";
 
-interface PartyPayable {
+interface PartyPayableMap {
   partyPayableMap: {[key: string]: {payable: number, isChecked: boolean}}
   deleteParty: React.MouseEventHandler<HTMLButtonElement>
 }
 
-export default function AddParty({partyPayableMap, deleteParty}: PartyPayable) {
+export default function PartyPayableMap({partyPayableMap, deleteParty}: PartyPayableMap) {
   return (
     <div>
         <div>

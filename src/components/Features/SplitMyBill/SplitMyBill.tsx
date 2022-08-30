@@ -1,12 +1,12 @@
-import React, { ChangeEvent, useState, FormEvent, MouseEventHandler, MouseEvent } from "react";
+import React, { ChangeEvent, useState, FormEvent, MouseEvent } from "react";
 import InputValue from "./GetValue";
 import Greet from "./SimpleGreeter";
 import { properties } from "../../../StaticValues/properties";
 import BaseCalculator from "./Calculator/BaseCalculator";
 import AddParty from "./AddParty";
 import AddItem from "./AddItem";
-import PersonPayableMap from "./PersonPayableMap";
-import { getValue } from "@testing-library/user-event/dist/utils";
+import PersonPayableMap from "./PartyPayableMap";
+import ItemMap from "./ItemMap";
 
 const SplitMyBill = () => {
   const gstMultiplier = 1.07;
@@ -30,7 +30,6 @@ const SplitMyBill = () => {
 
   // AddParty component
   const [ partyName, setPartyName ] = useState<string>("");
-  const [ amountPayable, setAmountPayable ] = useState<number>(0);
   const [ partyPayableMap, setPartyPayableMap ] = useState<{[key: string]: {payable: number, isChecked: boolean}}>({});
   const addPartyInput = (e: ChangeEvent<HTMLInputElement>) => {
     setPartyName(e.target.value);
@@ -57,7 +56,8 @@ const SplitMyBill = () => {
   const [ itemName, setItemName ] = useState<string>("");
   const [ itemCost, setItemCost ] = useState<string>("");
   const [ splitDecision, setSplitDecision ] = useState<boolean>(false);
-  const [ itemNameCostMap, setItemNameCostMap ] = useState<{[key: string]: number}>({});
+  // const [ itemMap, setItemMap ] = useState<{[key: string]: {cost: number, sharedBy: Set<string>}}>({});
+  const [ itemMap, setItemMap ] = useState<{[key: string]: {cost: number, isShared: boolean}}>({});
   const addItemNameInput = (e: ChangeEvent<HTMLInputElement>) => {
     setItemName(e.target.value);
   }
@@ -66,11 +66,19 @@ const SplitMyBill = () => {
   }
   const addItemSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    itemNameCostMap[itemName] = Number(itemCost);
-    setItemNameCostMap(itemNameCostMap);
+    if (itemMap[itemName] == null) {
+      setItemMap({...itemMap, [itemName]: {
+        cost: parseInt(itemCost),
+        isShared: false
+      }})
+    }
     setItemName("");
     setItemCost("");
-    console.log(itemNameCostMap)
+  }
+  const deleteItem = (e: MouseEvent<HTMLButtonElement>) => {
+    let currentItemMap = {...itemMap};
+    delete currentItemMap[e.currentTarget.value];
+    setItemMap(currentItemMap);
   }
 
   return (
@@ -80,6 +88,7 @@ const SplitMyBill = () => {
       <AddParty partyName={partyName} addPartySubmit={addPartySubmit} addPartyInput={addPartyInput}/>
       <PersonPayableMap partyPayableMap={partyPayableMap} deleteParty={deleteParty}/>
       <AddItem itemName={itemName} itemCost={itemCost} addItemSubmit={addItemSubmit} addItemNameInput={addItemNameInput} addItemCostInput={addItemCostInput}/>
+      <ItemMap itemMap={itemMap} deleteItem={deleteItem}/>
     </div>
   );
 };

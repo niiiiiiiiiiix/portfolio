@@ -1,14 +1,14 @@
 import React from "react";
 
-interface AddParty {
+interface AddItem {
   itemName: string
   itemCost: string
-  addItemSubmit: React.FormEventHandler<HTMLFormElement>
   addItemNameInput: React.ChangeEventHandler<HTMLInputElement>
   addItemCostInput: React.ChangeEventHandler<HTMLInputElement>
+  addItemSubmit: React.FormEventHandler<HTMLFormElement>
 }
 
-export default function AddParty({itemName, itemCost, addItemSubmit, addItemNameInput, addItemCostInput}: AddParty) {
+export default function AddItem({itemName, itemCost, addItemSubmit, addItemNameInput, addItemCostInput}: AddItem) {
   return (
     <div>
         <form onSubmit={addItemSubmit}>
