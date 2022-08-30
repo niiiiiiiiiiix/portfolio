@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, FormEvent } from "react";
+import React, { ChangeEvent, useState, FormEvent, MouseEventHandler, MouseEvent } from "react";
 import InputValue from "./GetValue";
 import Greet from "./SimpleGreeter";
 import { properties } from "../../../StaticValues/properties";
@@ -6,6 +6,7 @@ import BaseCalculator from "./Calculator/BaseCalculator";
 import AddParty from "./AddParty";
 import AddItem from "./AddItem";
 import PersonPayableMap from "./PersonPayableMap";
+import { getValue } from "@testing-library/user-event/dist/utils";
 
 const SplitMyBill = () => {
   const gstMultiplier = 1.07;
@@ -30,16 +31,26 @@ const SplitMyBill = () => {
   // AddParty component
   const [ partyName, setPartyName ] = useState<string>("");
   const [ amountPayable, setAmountPayable ] = useState<number>(0);
-  const [ partyPayableMap, setPartyPayableMap ] = useState<{[key: string]: number}>({});
+  const [ partyPayableMap, setPartyPayableMap ] = useState<{[key: string]: {payable: number, isChecked: boolean}}>({});
   const addPartyInput = (e: ChangeEvent<HTMLInputElement>) => {
     setPartyName(e.target.value);
   }
   const addPartySubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    partyPayableMap[partyName] = amountPayable;
-    setPartyPayableMap(partyPayableMap);
+    if (partyPayableMap[partyName] == null) {
+      setPartyPayableMap({...partyPayableMap, [partyName]: {
+        payable: 0,
+        isChecked: false
+      }});
+    } else {
+      alert("Check name for duplicate")
+    }
     setPartyName("");
-    console.log(partyPayableMap);
+  }
+  const deleteParty = (e: MouseEvent<HTMLButtonElement>) => {
+    let currentPartyPayableMap = {...partyPayableMap};
+    delete currentPartyPayableMap[e.currentTarget.value];
+    setPartyPayableMap(currentPartyPayableMap);
   }
 
   // AddItem component
@@ -67,7 +78,7 @@ const SplitMyBill = () => {
       <Greet name="random"/>
       <BaseCalculator totalCost={totalCost} totalCount={participantCount}/>
       <AddParty partyName={partyName} addPartySubmit={addPartySubmit} addPartyInput={addPartyInput}/>
-      <PersonPayableMap partyPayableMap={partyPayableMap}/>
+      <PersonPayableMap partyPayableMap={partyPayableMap} deleteParty={deleteParty}/>
       <AddItem itemName={itemName} itemCost={itemCost} addItemSubmit={addItemSubmit} addItemNameInput={addItemNameInput} addItemCostInput={addItemCostInput}/>
     </div>
   );
