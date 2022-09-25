@@ -19,7 +19,7 @@ export default function AddParty({partyName, addPartySubmit, addPartyInput}: Add
             />
           <button
             type="submit"
-            className="btn"
+            className="button"
             >
             Add person
           </button>

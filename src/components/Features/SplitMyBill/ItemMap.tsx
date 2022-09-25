@@ -1,7 +1,7 @@
 import React from "react";
 
 interface ItemMap {
-  itemMap: {[key: string]: {cost: number, isShared: boolean}}
+  itemMap: {[key: string]: {cost: number, sharedBy: {}}}
   deleteItem: React.MouseEventHandler<HTMLButtonElement>
 }
 
