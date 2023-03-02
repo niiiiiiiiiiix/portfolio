@@ -2,10 +2,10 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Home } from './components/Home/Home';
-import { Beans } from './components/Beans/Beans';
+import Beans from './components/Beans/Beans';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <header className="App-header">
@@ -28,6 +28,6 @@ function App() {
       </main>
     </BrowserRouter>
   );
-}
+};
 
 export default App;
