@@ -8,10 +8,7 @@ const Beans = () => {
     axios
       .get(`${process.env.REACT_APP_PORTFOLIO_SERV}/beans/homeground`)
       .then((response: AxiosResponse) => {
-        const responseArray = response.data;
-        setBeans([]);
-        setBeans(responseArray);
-        console.log(response.data);
+        setBeans(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -22,10 +19,7 @@ const Beans = () => {
     axios
       .get(`${process.env.REACT_APP_PORTFOLIO_SERV}/beans/alchemist`)
       .then((response: AxiosResponse) => {
-        const responseArray = response.data;
-        setBeans([]);
-        setBeans(responseArray);
-        console.log(response.data);
+        setBeans(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -38,11 +32,26 @@ const Beans = () => {
       <h3>
         <button onClick={fetchHomeground}>Homeground</button>
         <button onClick={fetchAlchemist}>Alchemist</button>
-        <>
-          {beans.map((item, index) => {
-            return <p key={index}>{item[0]}</p>;
-          })}
-        </>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>name</th>
+                <th>link</th>
+              </tr>
+            </thead>
+            <tbody>
+              {beans.map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{item['name']}</td>
+                    <td>{item['link']}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </h3>
     </>
   );
